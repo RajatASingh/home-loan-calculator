@@ -13,7 +13,7 @@ col1, col2, col3 = st.columns(3)
 with col1:
     loan_amount = st.number_input("Loan Amount", value=1800000, step=100000)
 with col2:
-    interest_rate = st.number_input("Interest Rate (%)", value=11.0, step=0.1)
+    interest_rate = st.number_input("Interest Rate (%)", value=11.0, step=0.05)
 with col3:
     emi = st.number_input("EMI", value=20000, step=1000)
 
