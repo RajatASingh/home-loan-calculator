@@ -62,7 +62,7 @@ if calculate_btn:
     with interest_col3:
         st.metric("Actual Interest Saved", f"₹{interest_saved:,.2f}", delta=f"✓ {savings_percentage:.1f}%")
     with interest_col4:
-        st.metric("Months Saved", f"{months_saved} months")
+        st.metric("Time Saved (Months)", f"{months_saved} \n({months_saved/12:.1f} years)")
     
     # Row 2: Amount Paid Values
     paid_col1, paid_col2, paid_col3, paid_col4 = st.columns(4)
@@ -75,7 +75,7 @@ if calculate_btn:
         amount_diff = total_paid_base - total_paid_extra
         st.metric("Amount Difference", f"₹{amount_diff:,.2f}", delta="Paid more" if amount_diff < 0 else "Saved")
     with paid_col4:
-        st.metric("Time to Clear", f"{len(df_extra)} months", delta=f"vs {len(df_base)} months")
+        st.metric("Time to Clear (Months)", f"{len(df_extra)} \n({len(df_extra)/12:.1f} years)", delta=f"vs {len(df_base)}")
 
     # Create tabs for results
     tab_graph, tab_table = st.tabs(["📊 Graphs", "📋 Table"])
