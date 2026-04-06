@@ -1,43 +1,67 @@
 import streamlit as st
 from loan_calculator import  loan_simulator
 import plotly.graph_objects as go
+from get_ip import get_ip
 
+
+def calculate_emi(principal, annual_rate, tenure_months):
+    monthly_rate = annual_rate / 12 / 100
+    if monthly_rate == 0:
+        return principal / tenure_months
+    emi = principal * monthly_rate * (1 + monthly_rate)**tenure_months / ((1 + monthly_rate)**tenure_months - 1)
+    return emi
+
+
+# Initialize session state for EMI
+if 'emi' not in st.session_state:
+    st.session_state.emi = 20000
 
 # Set page config for wide layout
 st.set_page_config(layout="wide", page_title="Home Loan Analyzer")
 
 st.title("🏠 Home Loan Prepayment Analyzer")
 
+
+
 # First row - 3 columns
 col1, col2, col3 = st.columns(3)
 with col1:
-    loan_amount = st.number_input("Loan Amount", value=1800000, step=100000)
+    loan_amount = st.number_input("Loan Amount", value=2500000, step=100000)
 with col2:
-    interest_rate = st.number_input("Interest Rate (%)", value=11.0, step=0.05)
+    interest_rate = st.number_input("Interest Rate (%)", value=7.75, step=0.05)
 with col3:
-    emi = st.number_input("EMI", value=20000, step=1000)
+    tenure = st.number_input("Loan Tenure (Months)", value=360, step=12)
 
 # Second row - 3 columns
 col4, col5, col6 = st.columns(3)
+with col6:
+    # EMI will be shown after calculation
+    pass
 with col4:
-    extra_payment = st.number_input("Extra Payment", value=20000, step=1000)
+    strategy = st.selectbox("Extra Payment Strategy", ["monthly", "quarterly", "semi-annual", "annual", "alternate"])
 with col5:
-    strategy = st.selectbox("Extra Payment Strategy", ["monthly", "quarterly", "alternate"])
+    extra_payment = st.number_input("Extra Payment", value=20000, step=1000)
+
 
 # Third row - Button
 col_spacer1, col_spacer2, col_button = st.columns([2.5, 2.5, 0.5])
 with col_button:
     calculate_btn = st.button("Calculate", key="calculate_btn")
+    
 
 # Run simulation
 if calculate_btn:
+    st.session_state.emi = calculate_emi(loan_amount, interest_rate, tenure)
+    
+    st.write(f"Calculated EMI: ₹{st.session_state.emi:,.2f}")
+    
     st.divider()
     df_extra = loan_simulator(
-        loan_amount, interest_rate, emi, extra_payment, strategy
+        loan_amount, interest_rate, st.session_state.emi, extra_payment, strategy
     )
 
     df_base = loan_simulator(
-        loan_amount, interest_rate, emi, 0, "monthly"
+        loan_amount, interest_rate, st.session_state.emi, 0, "monthly"
     )
 
     # Calculate summary statistics

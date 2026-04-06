@@ -5,7 +5,7 @@ def loan_simulator(
     annual_interest_rate,
     emi,
     extra_payment=0,
-    extra_strategy="monthly"  # monthly, quarterly, alternate
+    extra_strategy="monthly"  # monthly, quarterly, semi-annual, annual, alternate
 ):
     monthly_rate = annual_interest_rate / 12 / 100
     balance = loan_amount
@@ -29,6 +29,10 @@ def loan_simulator(
         if extra_strategy == "monthly":
             extra = extra_payment
         elif extra_strategy == "quarterly" and month % 3 == 0:
+            extra = extra_payment
+        elif extra_strategy == "semi-annual" and month % 6 == 0:
+            extra = extra_payment
+        elif extra_strategy == "annual" and month % 12 == 0:
             extra = extra_payment
         elif extra_strategy == "alternate" and month % 2 == 0:
             extra = extra_payment
