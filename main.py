@@ -1,7 +1,7 @@
 import streamlit as st
-from loan_calculator import  loan_simulator
+
 import plotly.graph_objects as go
-from get_ip import get_ip
+
 from src import loan_simulator, get_ip
 
 
