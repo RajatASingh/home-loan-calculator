@@ -54,4 +54,4 @@ It is based on a simple loan simulator and shows how much interest you can save.
 
 I used the HDFC Bank EMI calculator as a reference while building this project.
 
-HDFC Bank EMI Calculator: https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan/emi-calculator
+HDFC Bank EMI Calculator: https://homeloans.hdfc.bank.in/home-loan-emi-calculator
