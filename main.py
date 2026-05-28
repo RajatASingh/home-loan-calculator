@@ -18,11 +18,53 @@ if 'emi' not in st.session_state:
     st.session_state.emi = 20000
 
 # Set page config for wide layout
-st.set_page_config(layout="wide", page_title="Home Loan Analyzer")
+st.set_page_config(
+    layout="wide",
+    page_title="🏡 Loan Prepayment Planner"
+)
 
-st.title("🏠 Home Loan Prepayment Analyzer")
+# st.title("🏡 Loan Prepayment Planner")
+# st.caption("💡 See how prepayments reduce your EMI, interest & loan tenure")
+# st.divider()
 
+st.markdown("""
+    <style>
+    .title-container {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    .emoji {
+        font-size: 42px;
+    }
+    .main-title {
+        font-size: 42px;
+        font-weight: 700;
+        background: linear-gradient(90deg, #00c6ff, #0072ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        display: inline;
+    }
+    .subtitle {
+        text-align: center;
+        font-size: 18px;
+        color: #6c757d;
+        margin-bottom: 20px;
+    }
+    </style>
+""", unsafe_allow_html=True)
 
+# Title (emoji separate)
+st.markdown("""
+    <div class="title-container">
+        <span class="emoji">🏡</span>
+        <span class="main-title"> Loan Prepayment Planner</span>
+    </div>
+""", unsafe_allow_html=True)
+
+# Subtitle
+st.markdown("<div class='subtitle'>💡 Optimize EMI, reduce interest, and close your loan faster</div>", unsafe_allow_html=True)
+
+st.divider()
 
 # First row - 3 columns
 col1, col2, col3 = st.columns(3)
