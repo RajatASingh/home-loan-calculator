@@ -69,7 +69,7 @@ st.divider()
 # First row - 3 columns
 col1, col2, col3 = st.columns(3)
 with col1:
-    loan_amount = st.number_input("Loan Amount", value=2500000, step=100000)
+    loan_amount = st.number_input("Loan Amount", value=4000000, step=100000)
 with col2:
     interest_rate = st.number_input("Interest Rate (%)", value=7.75, step=0.05)
 with col3:
@@ -83,7 +83,7 @@ with col6:
 with col4:
     strategy = st.selectbox("Extra Payment Strategy", ["monthly", "quarterly", "semi-annual", "annual", "alternate"])
 with col5:
-    extra_payment = st.number_input("Extra Payment", value=20000, step=1000)
+    extra_payment = st.number_input("Extra Payment", value=0, step=1000)
 
 
 # Third row - Button
